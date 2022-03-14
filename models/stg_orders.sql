@@ -1,9 +1,4 @@
-
-{{ config (
-    materialized="table"
-)}}
-
-customer_orders as (
+with customer_orders as (
 
     select
         customer_id,
