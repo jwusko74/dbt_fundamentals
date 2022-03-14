@@ -1,14 +1,12 @@
-with customer_orders as (
-
+with orders as (
+    
     select
-        customer_id,
+        id as order_id,
+        user_id as customer_id,
+        order_date,
+        status
 
-        min(order_date) as first_order_date,
-        max(order_date) as most_recent_order_date,
-        count(order_id) as number_of_orders
-
-    from orders
-
-    group by 1
-
+    from raw.jaffle_shop.orders
 )
+
+select * from orders
