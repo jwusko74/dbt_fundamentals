@@ -1,6 +1,8 @@
-with payment as (
+/* Raw payment data from Snowflake */
+with payment as 
+(
     select
-        id as payment_id,	
+        id as payment_id,
         orderid as order_id,
         paymentmethod as payment_method,
         status,
@@ -8,6 +10,5 @@ with payment as (
         created as created_dt
     from {{source('stripe','payment')}}    
 )
-
 select * from payment
 

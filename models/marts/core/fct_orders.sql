@@ -14,7 +14,8 @@ order_payments as (
     group by 1
 ),
 
-final as (
+final as 
+(
     select
         orders.order_id,
         orders.customer_id,
@@ -24,3 +25,5 @@ final as (
     left join order_payments using (order_id)
 )
 select * from final
+
+/* Fact table containing order information */

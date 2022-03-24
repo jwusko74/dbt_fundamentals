@@ -1,3 +1,4 @@
+/* Customer order model including lifetime value */
 with customers as (
     select * from {{ ref('stg_customers')}}
 ),
@@ -22,8 +23,8 @@ customer_orders as (
 ),
 
 
-final as (
-
+final as 
+(
     select
         customers.customer_id,
         customer_orders.order_id,
@@ -33,13 +34,10 @@ final as (
         customer_orders.most_recent_order_date,
         coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
         coalesce(lifetime_value.amount, 0) as lifetime_value
-        
-
     from customers
 
     left join customer_orders using (customer_id)
     left join lifetime_value using (order_id)
-
 )
 
 select * from final

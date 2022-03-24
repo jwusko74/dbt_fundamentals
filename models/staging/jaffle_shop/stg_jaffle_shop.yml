@@ -5,10 +5,10 @@ models:
     description: One unique customer per row.
     columns: 
       - name: customer_id
-        description: Primary key for stg_customers
+        description: Primary key for customers
         tests:
           - unique
-          - not_null
+          - not_null;
 
   - name: stg_orders
     columns: 
@@ -31,4 +31,4 @@ models:
         tests:
           - relationships:
               to: ref('stg_customers')
-              field: customer_id
+              field: customer_id;

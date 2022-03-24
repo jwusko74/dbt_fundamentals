@@ -4,7 +4,6 @@ with orders as (
         user_id as customer_id,
         order_date,
         status
-        description: '{{doc("order_status")}}'
     from {{source('jaffle_shop','orders')}}
 )
 

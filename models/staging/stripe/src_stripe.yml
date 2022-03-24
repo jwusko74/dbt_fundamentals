@@ -6,7 +6,23 @@ sources:
     schema: stripe
     tables: 
       - name: payment
+        description: Raw payment data 
         loaded_at_field: _batched_at
         freshness:
           warn_after: {count: 12, period: hour}
           error_after: {count: 24, period: hour}
+      - name: id
+        description: Payment ID primary key, used as foreign key to join to orders
+      - name: paymentmethod
+        description: '{{doc("pay_method")}}'      
+      - name: status
+        description: Documents the status of the payment received
+      - name: amount
+        description: Documents payment amount as a whole numer requires division by 100
+      - name: created
+        description: Date the payment record was created
+      - name: orderid
+        description: Timestamp to identify when payment was processed;
+
+
+

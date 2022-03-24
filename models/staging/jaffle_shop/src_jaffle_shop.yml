@@ -10,11 +10,10 @@ sources:
         description: Raw customer data.
         columns:
         - name: id
-          description: Primary key for customers data.
+          description: Test uniqueness and if values are null in the id field
           tests:
           - unique
           - not_null
-          description: Test uniqueness and if values are null in the id field
 
       - name: orders
         description: Raw orders data.
@@ -24,9 +23,7 @@ sources:
           tests:
           - unique
           - not_null
-        loaded_at_field: _etl_loaded_at
-        description: Load date of orders data.
+          loaded_at_field: _etl_loaded_at
         freshness:
           warn_after: {count: 12, period: hour}
           error_after: {count: 24, period: hour}
-        description: Test the age of data in the source.

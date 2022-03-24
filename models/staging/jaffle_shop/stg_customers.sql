@@ -1,3 +1,4 @@
+/* Raw customer data from Snowflake */
 with customers as (
     select
         id as customer_id,
