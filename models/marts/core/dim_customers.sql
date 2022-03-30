@@ -1,15 +1,9 @@
 /* Customer order model including lifetime value */
-with customers as (
-    select * from {{ ref('stg_customers')}}
-),
-
-orders as (
-    select * from {{ ref('stg_orders') }}
-),
-
-lifetime_value as (
-    select * from {{ref('fct_orders')}}
-),
+with 
+customers as (select * from {{ ref('stg_customers')}}),
+orders as (select * from {{ ref('stg_orders') }}),
+lifetime_value as (select * from {{ref('fct_orders')}}),
+employees as (select * from ref{{('employees')}}),
 
 customer_orders as (
     select
@@ -30,6 +24,7 @@ final as
         customer_orders.order_id,
         customers.first_name,
         customers.last_name,
+        employees.employee_id is not null as is_employee,
         customer_orders.first_order_date,
         customer_orders.most_recent_order_date,
         coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
@@ -38,6 +33,7 @@ final as
 
     left join customer_orders using (customer_id)
     left join lifetime_value using (order_id)
+    left join employees using(customer_id)
 )
 
 select * from final
